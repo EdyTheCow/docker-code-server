@@ -1,0 +1,38 @@
+version: '3'
+services:
+
+ vscode:
+    image: vscodesrv
+    user: "1000:113" # Your user ID : Docker group ID
+    networks:
+      - global
+      - local
+    environment:
+      - PASSWORD=${PASSWORD}
+      - DOCKER_USER=${USER}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${DATA_DIR}/code-server:/home/coder
+    labels:
+      - "traefik.enable=true"
+      # HTTP
+      - "traefik.http.routers.code_server.entrypoints=web"
+      - "traefik.http.routers.code_server.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.code_server.middlewares=code_server_https"
+      - "traefik.http.middlewares.code_server_https.redirectscheme.scheme=https"
+      # HTTPS
+      - "traefik.http.routers.code_server-https.entrypoints=websecure"
+      - "traefik.http.routers.code_server-https.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.code_server-https.tls=true"
+      - "traefik.http.routers.code_server-https.tls.certresolver=letsencrypt"
+      - "traefik.http.services.code_server-https.loadbalancer.server.port=8080"
+      # Basic auth
+      - "traefik.http.routers.code_server-auth.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.code_server-auth.middlewares=basic-auth"
+      - "traefik.http.routers.code_server-auth.tls=true"
+
+networks:
+  local:
+    external: false
+  global:
+    external: true
