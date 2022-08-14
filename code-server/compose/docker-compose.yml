@@ -2,7 +2,7 @@ version: '3'
 services:
 
  vscode:
-    image: vscodesrv
+    image: ghcr.io/edythecow/vscode-server
     user: "1000:113" # Your user ID : Docker group ID
     networks:
       - global
