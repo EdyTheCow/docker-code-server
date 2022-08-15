@@ -61,27 +61,27 @@ The container itself runs a non-root user you'll have to specify in `code-server
 <b>Example: `user: "1000:999"`</b><br />
 1000 being your user ID and 999 being your docker group ID.
 
-The `DOCKER_USER=${USER}` variable is meant to take your current user's username and pass it on to the container. Meaning you'll have your username from host automatically setup inside container. You can however remove the variable from `docker-compose.yml` alltogether and it will use username `coder` instead.
+<b>DOCKER_USER variable</b><br />
+The `DOCKER_USER=${USER}` variable is meant to take your current user's username and pass it on to the container. Meaning you'll have your username from host automatically setup inside of container. You can however remove the variable from `docker-compose.yml` alltogether, username `coder` will be used by default instead.
 
 <b>Start docker compose</b><br />
  ```
 docker-compose up -d
  ```
-You can now navigate to `DOMAIN` you set earlier to access code-server. You can now open terminal and continue setup of zsh and Oh My Zsh.
+You can now navigate to `DOMAIN` you set earlier to access code-server and open terminal to continue setup of zsh and Oh My Zsh.
 
 ### Setup Oh My Zsh theme
-By default image installs zsh and Oh My Zsh with a powerlevel10k theme, so you'll have a fancy terminal inside of coder-server. 
+By default image installs zsh and Oh My Zsh with a powerlevel10k theme, so you'll have a fancy terminal inside of coder-server! These steps can be skipped if you prefer default look or a different theme.
 
-<b>Install font for Oh My Zsh theme</b><br />
-Download the font, install it and set it in code-server. You can follow the Visual Studio Code guide provided in the same link as the font.<br />
+<b>Install font for powerlevel10k theme</b><br />
+Download the font, install it and change it in code-server. You can follow the Visual Studio Code guide provided in the same link as the font.<br />
+
+Installing font for Oh My Zsh theme
 https://github.com/romkatv/powerlevel10k#manual-font-installation
 
 <b>Open .zshrc and change theme to</b><br />
 `ZSH_THEME="powerlevel10k/powerlevel10k"`<br />
-You can also use any other theme if you prefer something else.
-
-Installing font for Oh My Zsh theme
-https://github.com/romkatv/powerlevel10k#manual-font-installation
+You'll be asked to go through a setup process once relaunch your terminal.
 
 ## Post-installation
 You can now install Docker and any other extensions you might want.
