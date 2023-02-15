@@ -3,13 +3,13 @@ services:
 
  vscode:
     image: ghcr.io/edythecow/vscode-server
-    user: "1000:113" # Your user ID : Docker group ID
+    user: "1000:1000" # Your user ID : Your group ID
     networks:
       - global
       - local
     environment:
       - PASSWORD=${PASSWORD}
-      - DOCKER_USER=${USER}
+      - CONTAINER_USER=${USER}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${DATA_DIR}/code-server:/home/coder

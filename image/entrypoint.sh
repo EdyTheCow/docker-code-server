@@ -6,12 +6,12 @@ if [ ! -d /home/coder/workspace ]; then
   mkdir -p /home/coder/workspace
 fi
 
-# If DOCKER_USER is set and if user doesn't exist already, switch container's user to match host's user
-if [ "${DOCKER_USER-}" ] && ! grep -q "^$DOCKER_USER:" /etc/passwd; then
-  echo "$DOCKER_USER ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/nopasswd > /dev/null
-  sudo usermod --login "$DOCKER_USER" coder
-  sudo groupmod -n "$DOCKER_USER" coder
-  USER="$DOCKER_USER"
+# If CONTAINER_USER is set and if user doesn't exist already, switch container's user to match host's user
+if [ "${CONTAINER_USER-}" ] && ! grep -q "^$CONTAINER_USER:" /etc/passwd; then
+  echo "$CONTAINER_USER ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/nopasswd > /dev/null
+  sudo usermod --login "$CONTAINER_USER" coder
+  sudo groupmod -n "$CONTAINER_USER" coder
+  USER="$CONTAINER_USER"
   sudo sed -i "/coder/d" /etc/sudoers.d/nopasswd
 fi
 
